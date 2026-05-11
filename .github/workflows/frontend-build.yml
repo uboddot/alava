@@ -25,9 +25,9 @@ jobs:
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Build Docker image
-        run: docker build -f ./frontend/Dockerfile -t ghcr.io/${{ github.repository_owner }}/frontend_lean_learn:latest -t ghcr.io/${{ github.repository_owner }}/frontend_lean_learn:${{ github.sha }} ./frontend
+        run: docker build -f ./alavaFrontend/Dockerfile -t ghcr.io/${{ github.repository_owner }}/frontend_alava:latest -t ghcr.io/${{ github.repository_owner }}/frontend_alava:${{ github.sha }} ./alavaFrontend
 
       - name: Push Docker image
         run: |
-          docker push ghcr.io/${{ github.repository_owner }}/frontend_lean_learn:latest
-          docker push ghcr.io/${{ github.repository_owner }}/frontend_lean_learn:${{ github.sha }}
+          docker push ghcr.io/${{ github.repository_owner }}/frontend_alava:latest
+          docker push ghcr.io/${{ github.repository_owner }}/frontend_alava:${{ github.sha }}
