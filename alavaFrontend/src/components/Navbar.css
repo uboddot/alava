@@ -1,0 +1,24 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 1rem;
+  background-color: #fdfbc5;
+  color: white;
+  border-radius: 0 10rem 0 10rem;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 1rem;
+  width: 50%;
+
+  & li {
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease;
+  }
+}

@@ -2,7 +2,7 @@ name: build and push frontend image
 
 on:
   push:
-    branches: [main, dev, ciSetup]
+    branches: [main, dev, navigation]
     paths:
       - "alavaFrontend/**"
       - ".github/workflows/frontend-build.yml"
