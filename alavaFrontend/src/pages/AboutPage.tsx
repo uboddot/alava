@@ -1,5 +1,6 @@
 import './AboutPage.css';
 import {Logo} from '../elements/logo/Logo';
+import { TestLottie } from '../components/TestLottie';
 
 export {About};
 
@@ -27,6 +28,7 @@ function About() {
                 />
             </svg>
             <Logo />
+            <TestLottie />
         </div>
     )
 }
