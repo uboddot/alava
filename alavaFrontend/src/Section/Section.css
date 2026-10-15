@@ -1,0 +1,27 @@
+/* Each section fills exactly one screen; it only grows if its content would not fit. */
+.section {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  /* top padding keeps content clear of the fixed navigation bar */
+  padding: calc(var(--nav-height) + 1.5rem) 1.5rem 2rem;
+  text-align: center;
+}
+
+.section:nth-of-type(even) {
+  background-color: var(--muted);
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.section p {
+  max-width: 40rem;
+  line-height: 1.6;
+}

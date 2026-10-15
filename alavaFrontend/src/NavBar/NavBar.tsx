@@ -1,4 +1,7 @@
 import './NavBar.css';
+import { useState } from 'react';
+import { MenuIcon } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -6,32 +9,57 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
-
-const navItems = [
-  { label: 'Home', href: '#' },
-  { label: 'About', href: '#' },
-  { label: 'Offers', href: '#' },
-  { label: 'Impressions', href: '#' },
-  { label: 'Contact', href: '#' },
-];
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
+import { sections } from '../sections';
 
 export default NavBar;
 
 function NavBar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <header className="navBar">
-      <div className="navBarBrand">Alava</div>
-      <NavigationMenu>
+      <a href="#intro" className="navBarBrand">Alava</a>
+
+      {/* Desktop: horizontal links */}
+      <NavigationMenu className="navBarDesktop">
         <NavigationMenuList>
-          {navItems.map((item) => (
-            <NavigationMenuItem key={item.label}>
+          {sections.map((section) => (
+            <NavigationMenuItem key={section.id}>
               <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                <a href={item.href}>{item.label}</a>
+                <a href={`#${section.id}`}>{section.label}</a>
               </NavigationMenuLink>
             </NavigationMenuItem>
           ))}
         </NavigationMenuList>
       </NavigationMenu>
+
+      {/* Mobile: menu button opening a side sheet */}
+      <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
+        <SheetTrigger asChild>
+          <Button variant="ghost" size="icon" className="navBarMobileTrigger" aria-label="Open menu">
+            <MenuIcon />
+          </Button>
+        </SheetTrigger>
+        <SheetContent side="right">
+          <SheetHeader>
+            <SheetTitle>Alava</SheetTitle>
+          </SheetHeader>
+          <nav className="navBarMobileLinks">
+            {sections.map((section) => (
+              <a key={section.id} href={`#${section.id}`} onClick={() => setMenuOpen(false)}>
+                {section.label}
+              </a>
+            ))}
+          </nav>
+        </SheetContent>
+      </Sheet>
     </header>
   );
 }

@@ -1,31 +1,32 @@
-.content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: auto;
+:root {
+  --nav-height: 4rem;
 }
 
-.title {
-  font-size: 2rem;
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+.introTitle {
+  font-size: clamp(3rem, 15vw, 7rem);
   font-weight: bold;
+  line-height: 1;
 }
 
-.subtitle {
-  font-size: 1.2rem;
-  color: #666;
-}
-
-.section .title:first-child {
-  font-size: 1.5rem;
-  font-weight: bold;
+.introSubtitle {
+  font-size: clamp(1.1rem, 4vw, 1.5rem);
+  color: var(--muted-foreground);
 }
 
 .imageCard {
-  border: 1px solid #ccc;
+  width: 100%;
+  max-width: 48rem;
+  aspect-ratio: 16 / 9;
+  max-height: 45svh;
+  border: 1px solid var(--border);
   border-radius: 8px;
-  overflow: hidden;
-  width: 90vw;
-  height: 40vh;
-  background-image: url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80");
+  background-image: url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80");
+  background-size: cover;
+  background-position: center;
 }

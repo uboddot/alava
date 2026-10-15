@@ -23,6 +23,7 @@ Docker dev (from repo root): `docker compose -f docker-compose.dev.yml up --watc
 
 - React with Vite.
 - Before writing a UI component yourself always check if there are good components in the shadcn UI library.
+- when building UI always also account for mobile device. Everything should look good for mobile and desktop.
 - Use CSS files for styling.
 
 ## CI / deployment

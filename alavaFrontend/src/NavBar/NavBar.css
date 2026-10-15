@@ -1,17 +1,61 @@
 .navBar {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 10;
+  height: var(--nav-height);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  padding: 0.5rem 1.5rem;
-  border-bottom: 1px solid #e5e5e5;
-  background-color: #fff;
+  padding: 0 1.5rem;
+  border-bottom: 1px solid var(--border);
+  background-color: var(--background);
 }
 
 .navBarBrand {
   font-size: 1.25rem;
   font-weight: bold;
+}
+
+.navBarDesktop {
+  flex: none;
+}
+
+.navBarMobileTrigger {
+  display: none;
+}
+
+.navBarMobileLinks {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem;
+}
+
+.navBarMobileLinks a {
+  display: flex;
+  align-items: center;
+  min-height: 3rem;
+  padding: 0 0.75rem;
+  border-radius: 6px;
+  font-size: 1.1rem;
+}
+
+.navBarMobileLinks a:hover,
+.navBarMobileLinks a:focus-visible {
+  background-color: var(--accent);
+}
+
+@media (max-width: 768px) {
+  .navBar {
+    padding: 0 1rem;
+  }
+
+  .navBarDesktop {
+    display: none;
+  }
+
+  .navBarMobileTrigger {
+    display: inline-flex;
+  }
 }
