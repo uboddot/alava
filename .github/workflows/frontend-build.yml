@@ -9,25 +9,60 @@ on:
   pull_request:
     branches: [main, dev]
 
+# serialize runs so two pushes never compute the same version tag
+concurrency:
+  group: frontend-version
+  cancel-in-progress: false
+
 jobs:
   build-and-push-frontend-image:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: read
+      contents: write
       packages: write
 
     steps:
       - name: checkout repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # push to main bumps the major (vX.0), push to dev bumps the minor (vX.Y); everything else is devX.X
+      - name: Compute version
+        id: version
+        run: |
+          latest=$(git tag -l 'v*' --sort=-v:refname | head -n1)
+          latest=${latest:-v0.0}
+          major=${latest#v}; major=${major%%.*}
+          minor=${latest##*.}
+          if [ "$GITHUB_EVENT_NAME" = push ] && [ "$GITHUB_REF_NAME" = main ]; then
+            version="v$((major + 1)).0"
+          elif [ "$GITHUB_EVENT_NAME" = push ] && [ "$GITHUB_REF_NAME" = dev ]; then
+            version="v${major}.$((minor + 1))"
+          else
+            version="devX.X"
+          fi
+          echo "Latest tag: $latest -> version: $version"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
 
       - name: Log in to GitHub Container Registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Build Docker image
-        run: docker build -f ./alavaFrontend/Dockerfile -t ghcr.io/${{ github.repository_owner }}/frontend_alava:latest -t ghcr.io/${{ github.repository_owner }}/frontend_alava:${{ github.sha }} ./alavaFrontend
+        run: docker build -f ./alavaFrontend/Dockerfile --build-arg VITE_APP_VERSION=${{ steps.version.outputs.version }} -t ghcr.io/${{ github.repository_owner }}/frontend_alava:latest -t ghcr.io/${{ github.repository_owner }}/frontend_alava:${{ github.sha }} ./alavaFrontend
 
       - name: Push Docker image
         run: |
           docker push ghcr.io/${{ github.repository_owner }}/frontend_alava:latest
           docker push ghcr.io/${{ github.repository_owner }}/frontend_alava:${{ github.sha }}
+
+      - name: Push versioned image and git tag
+        if: steps.version.outputs.version != 'devX.X'
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          docker tag ghcr.io/${{ github.repository_owner }}/frontend_alava:${{ github.sha }} ghcr.io/${{ github.repository_owner }}/frontend_alava:$VERSION
+          docker push ghcr.io/${{ github.repository_owner }}/frontend_alava:$VERSION
+          git tag "$VERSION" "$GITHUB_SHA"
+          git push origin "$VERSION"

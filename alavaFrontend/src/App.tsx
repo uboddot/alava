@@ -37,6 +37,7 @@ function App() {
           </p>
         </Section>
       </main>
+      <footer className="versionTag">{import.meta.env.VITE_APP_VERSION ?? 'devX.X'}</footer>
     </>
   )
 }

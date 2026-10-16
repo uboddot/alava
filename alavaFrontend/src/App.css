@@ -40,3 +40,11 @@
 .textLink:hover {
   color: var(--muted-foreground);
 }
+
+/* Small version tag at the very bottom of the page, in normal flow so it only shows when scrolled all the way down. */
+.versionTag {
+  padding: 0.5rem 1rem calc(0.5rem + env(safe-area-inset-bottom));
+  text-align: right;
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
