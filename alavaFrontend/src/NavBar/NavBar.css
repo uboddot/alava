@@ -8,7 +8,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1.5rem;
+  /* at least 1.5rem; on wide screens, whatever centres the content in --content-width */
+  padding: 0 max(1.5rem, calc((100% - var(--content-width)) / 2));
   border-bottom: 1px solid var(--border);
   background-color: var(--background);
 }
@@ -20,6 +21,23 @@
 
 .navBarDesktop {
   flex: none;
+}
+
+.navBarActions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navBarDivider {
+  width: 1px;
+  height: 1.5rem;
+  background-color: var(--border);
+}
+
+.navBarIconButton svg {
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .navBarMobileTrigger {
@@ -56,6 +74,11 @@
   font-size: 1.1rem;
 }
 
+.navBarMobileInstagram svg {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
 .navBarMobileLinks a:hover,
 .navBarMobileLinks a:focus-visible {
   background-color: var(--accent);
@@ -80,12 +103,20 @@
     box-shadow: 0px 0px 20px 20px var(--background);
   }
 
-  .navBarDesktop {
+  .navBarDesktop,
+  .navBarDivider {
     display: none;
   }
 
   .navBarMobileTrigger {
     display: inline-flex;
+  }
+
+  .navBarIconButton {
     background-color: var(--background);
+  }
+
+  .navBarIconButton:hover {
+    background-color: var(--accent);
   }
 }
