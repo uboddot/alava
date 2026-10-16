@@ -30,7 +30,7 @@ function NavBar() {
       {/* Desktop: horizontal links */}
       <NavigationMenu className="navBarDesktop">
         <NavigationMenuList>
-          {sections.map((section) => (
+          {sections.filter(section => !section.navignore).map((section) => (
             <NavigationMenuItem key={section.id}>
               <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
                 <a href={`#${section.id}`}>{section.label}</a>
@@ -47,12 +47,14 @@ function NavBar() {
             <MenuIcon />
           </Button>
         </SheetTrigger>
-        <SheetContent side="right">
+        <SheetContent side="right" className="navBarSheet">
           <SheetHeader>
-            <SheetTitle>Alava</SheetTitle>
+            <SheetTitle className="navBarSheetTitle">
+              <a href="#intro" onClick={() => setMenuOpen(false)}>Alava</a>
+            </SheetTitle>
           </SheetHeader>
           <nav className="navBarMobileLinks">
-            {sections.map((section) => (
+            {sections.filter(section => !section.navignore).map((section) => (
               <a key={section.id} href={`#${section.id}`} onClick={() => setMenuOpen(false)}>
                 {section.label}
               </a>

@@ -10,6 +10,7 @@ function App() {
       <NavBar />
       <main>
         <Section id="intro">
+          <button onClick={() => alert('Button clicked!')}>Click Me</button>
           <h1 className="introTitle">Alava</h1>
           <p className="introSubtitle">Vo mir für die mit Liebi & Pflanze</p>
         </Section>
