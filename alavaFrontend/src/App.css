@@ -1,5 +1,6 @@
 :root {
   --nav-height: 4rem;
+  --content-width: 72rem;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -29,4 +30,21 @@
   background-image: url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80");
   background-size: cover;
   background-position: center;
+}
+
+.textLink {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.textLink:hover {
+  color: var(--muted-foreground);
+}
+
+/* Small version tag at the very bottom of the page, in normal flow so it only shows when scrolled all the way down. */
+.versionTag {
+  padding: 0.5rem 1rem calc(0.5rem + env(safe-area-inset-bottom));
+  text-align: right;
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
 }
