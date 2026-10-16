@@ -46,13 +46,16 @@ jobs:
           echo "Latest tag: $latest -> version: $version"
           echo "version=$version" >> "$GITHUB_OUTPUT"
 
+      # PR runs only build (as a check); images are pushed only for real pushes so PRs never overwrite :latest
       - name: Log in to GitHub Container Registry
+        if: github.event_name == 'push'
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Build Docker image
         run: docker build -f ./alavaFrontend/Dockerfile --build-arg VITE_APP_VERSION=${{ steps.version.outputs.version }} -t ghcr.io/${{ github.repository_owner }}/frontend_alava:latest -t ghcr.io/${{ github.repository_owner }}/frontend_alava:${{ github.sha }} ./alavaFrontend
 
       - name: Push Docker image
+        if: github.event_name == 'push'
         run: |
           docker push ghcr.io/${{ github.repository_owner }}/frontend_alava:latest
           docker push ghcr.io/${{ github.repository_owner }}/frontend_alava:${{ github.sha }}
