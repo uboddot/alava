@@ -1,4 +1,5 @@
 import './App.css';
+import AboutContent from './Section/About/AboutContent';
 import NavBar from './NavBar/NavBar';
 import Offers from './Offers/Offers';
 import Section from './Section/Section';
@@ -15,8 +16,7 @@ function App() {
           <p className="introSubtitle">Vo mir für die mit Liebi & Pflanze</p>
         </Section>
         <Section id="about" title="About">
-          <p>Alava is a modern platform designed to help users discover and explore amazing opportunities. Our mission is to connect people with experiences that matter and inspire growth.</p>
-          <div className="imageCard" />
+          <AboutContent />
         </Section>
         <Section id="offers" title="Offers">
           <Offers />
