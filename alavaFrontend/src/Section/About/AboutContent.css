@@ -1,24 +1,33 @@
-.imageCard {
+/* Mobile: one centred column. Same spacing as between direct children of .section */
+.about,
+.aboutRow {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.aboutRowImage {
   width: 100%;
   max-width: 48rem;
   aspect-ratio: 16 / 9;
   max-height: 45svh;
   border: 1px solid var(--border);
   border-radius: 8px;
-  background-image: url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80");
-  background-size: cover;
-  background-position: center;
+  object-fit: cover;
 }
 
 /* Wrapper for the expandable part of the About text and its toggle button. */
 .aboutMore {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* Same spacing as between direct children of .section */
 .aboutMoreContent {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,6 +35,31 @@
   overflow: hidden;
   /* padding instead of margin so the space is part of the animated height */
   padding-bottom: 1rem;
+}
+
+/* Desktop: alternating two-column rows of text and image */
+@media (min-width: 769px) {
+  .about {
+    max-width: var(--content-width);
+    gap: 4rem;
+  }
+
+  .aboutMoreContent {
+    gap: 4rem;
+    padding-bottom: 0;
+  }
+
+  .aboutRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 3rem;
+    text-align: left;
+  }
+
+  .aboutRowReversed .aboutRowImage {
+    order: -1;
+  }
 }
 
 .aboutMoreTrigger {

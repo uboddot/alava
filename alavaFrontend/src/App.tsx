@@ -13,7 +13,7 @@ function App() {
       <main>
         <Section id="intro">
           <h1 className="introTitle">Àlava</h1>
-          <p className="introSubtitle">Vo mir für die mit Liebi & Pflanze</p>
+          <p className="introSubtitle">Catering vo mir für die mit Liebi & Pflanze</p>
         </Section>
         <Section id="about" title="About">
           <AboutContent />
