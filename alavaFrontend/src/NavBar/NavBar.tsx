@@ -1,5 +1,5 @@
 import './NavBar.css';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { MenuIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -19,11 +19,18 @@ import {
 import InstagramIcon from '../Icons/InstagramIcon';
 import { sections } from '../sections';
 import { instagram } from '../socials';
+import { useScrollIndicator } from './useScrollIndicator';
+
+const navSections = sections.filter(section => !section.navignore);
+const navSectionIds = navSections.map(section => section.id);
 
 export default NavBar;
 
 function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const desktopNavRef = useRef<HTMLElement>(null);
+  const scrollIndicatorRef = useRef<HTMLSpanElement>(null);
+  useScrollIndicator(navSectionIds, desktopNavRef, scrollIndicatorRef);
 
   return (
     <header className="navBar">
@@ -31,9 +38,9 @@ function NavBar() {
 
       <div className="navBarActions">
         {/* Desktop: horizontal links */}
-        <NavigationMenu className="navBarDesktop">
+        <NavigationMenu ref={desktopNavRef} className="navBarDesktop">
           <NavigationMenuList>
-            {sections.filter(section => !section.navignore).map((section) => (
+            {navSections.map((section) => (
               <NavigationMenuItem key={section.id}>
                 <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
                   <a href={`#${section.id}`}>{section.label}</a>
@@ -41,6 +48,7 @@ function NavBar() {
               </NavigationMenuItem>
             ))}
           </NavigationMenuList>
+          <span ref={scrollIndicatorRef} className="navBarScrollIndicator" aria-hidden="true" />
         </NavigationMenu>
 
         <span className="navBarDivider" aria-hidden="true" />
@@ -65,7 +73,7 @@ function NavBar() {
               </SheetTitle>
             </SheetHeader>
             <nav className="navBarMobileLinks">
-              {sections.filter(section => !section.navignore).map((section) => (
+              {navSections.map((section) => (
                 <a key={section.id} href={`#${section.id}`} onClick={() => setMenuOpen(false)}>
                   {section.label}
                 </a>

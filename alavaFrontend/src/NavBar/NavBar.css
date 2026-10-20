@@ -23,6 +23,19 @@
   flex: none;
 }
 
+/* scroll-progress bar under the desktop links, positioned by useScrollIndicator */
+.navBarScrollIndicator {
+  position: absolute;
+  left: 0;
+  bottom: -0.35rem;
+  height: 2px;
+  border-radius: 999px;
+  background-color: var(--foreground);
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, width, opacity;
+}
+
 .navBarActions {
   display: flex;
   align-items: center;
