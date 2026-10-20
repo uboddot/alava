@@ -46,72 +46,81 @@
 }
 
 :root {
+    /* Àlava brand palette (eyeballed from the logo; replace with exact values from the design file if available) */
+    --brand-orchid: #C878B0;       /* logo background: big colour blocks, large headings (white text only ~3:1) */
+    --brand-orchid-deep: #A14F8A;  /* buttons and links (~5.2:1 with white) */
+    --brand-gold: #E8B830;         /* highlights, icons, badges, dividers; dark text on it */
+    --brand-neon: #FF7FC8;         /* accent only: hover states, glow; never large areas or text on light */
+    --brand-cream: #FFF4E8;        /* page background */
+    --brand-plum: #3A1F33;         /* body text */
+    /* olive rind #C8BC1E intentionally left out, it stays in the logo */
+
     --radius: 0.625rem;
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
+    --background: var(--brand-cream);
+    --foreground: var(--brand-plum);
+    --card: #FFFAF4;                     /* lighter cream */
+    --card-foreground: var(--brand-plum);
+    --popover: #FFFAF4;
+    --popover-foreground: var(--brand-plum);
+    --primary: var(--brand-orchid-deep);
+    --primary-foreground: #FFFFFF;
+    --secondary: var(--brand-gold);
+    --secondary-foreground: var(--brand-plum);
+    --muted: #F6E4EE;                    /* pale orchid, alternating sections */
+    --muted-foreground: #7A5470;         /* muted plum, ~5.8:1 on cream */
+    --accent: #FFD6EC;                   /* soft neon tint for hover/active backgrounds */
+    --accent-foreground: var(--brand-plum);
     --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
+    --border: #EBD3DF;
+    --input: #EBD3DF;
+    --ring: var(--brand-orchid-deep);
+    --chart-1: var(--brand-orchid-deep);
+    --chart-2: var(--brand-gold);
+    --chart-3: var(--brand-orchid);
+    --chart-4: var(--brand-neon);
+    --chart-5: var(--brand-plum);
+    --sidebar: var(--brand-cream);
+    --sidebar-foreground: var(--brand-plum);
+    --sidebar-primary: var(--brand-orchid-deep);
+    --sidebar-primary-foreground: #FFFFFF;
+    --sidebar-accent: #FFD6EC;
+    --sidebar-accent-foreground: var(--brand-plum);
+    --sidebar-border: #EBD3DF;
+    --sidebar-ring: var(--brand-orchid-deep);
 }
 
 .dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.205 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.205 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.922 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
+    --background: #241320;               /* deep plum */
+    --foreground: var(--brand-cream);
+    --card: #2F1A2A;
+    --card-foreground: var(--brand-cream);
+    --popover: #2F1A2A;
+    --popover-foreground: var(--brand-cream);
+    --primary: var(--brand-orchid);
+    --primary-foreground: var(--brand-plum);
+    --secondary: var(--brand-gold);
+    --secondary-foreground: var(--brand-plum);
+    --muted: #3A1F33;
+    --muted-foreground: #D9B8CC;
+    --accent: #4D2943;
+    --accent-foreground: var(--brand-cream);
     --destructive: oklch(0.704 0.191 22.216);
     --border: oklch(1 0 0 / 10%);
     --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.556 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
+    --ring: var(--brand-orchid);
+    --chart-1: var(--brand-orchid);
+    --chart-2: var(--brand-gold);
+    --chart-3: var(--brand-neon);
+    --chart-4: #D9B8CC;
+    --chart-5: var(--brand-cream);
+    --sidebar: #2F1A2A;
+    --sidebar-foreground: var(--brand-cream);
+    --sidebar-primary: var(--brand-orchid);
+    --sidebar-primary-foreground: var(--brand-plum);
+    --sidebar-accent: #4D2943;
+    --sidebar-accent-foreground: var(--brand-cream);
     --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
+    --sidebar-ring: var(--brand-orchid);
 }
 
 @layer base {
