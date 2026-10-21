@@ -1,0 +1,156 @@
+/* Mobile: one column of full-bleed image cards with the title overlaid; text slides in on tap */
+.offers {
+  width: 100%;
+  max-width: 48rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* overrides the shadcn Card defaults; border, shadow and radius of the offer cards go here */
+.offerCard {
+  gap: 0;
+  padding: 0;
+  /* the image goes edge to edge and the card's rounded corners clip it */
+  overflow: hidden;
+}
+
+.offerHeader {
+  position: relative;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+}
+
+.offerTitle {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.offerImage {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+/* Title centred on the image on a light glow. The glow is a single radial gradient filling the element:
+   50% opaque behind the text and fully transparent at the element's edges, so it has no visible border.
+   The large padding gives the fade room around the text. */
+.offerOverlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 1.25rem 2.5rem;
+  color: #ffffff;
+  background: radial-gradient(
+    closest-side,
+    rgba(0, 0, 0, 0.5) 55%,
+    rgba(231, 225, 231, 0) 100%
+  );
+  white-space: nowrap;
+}
+
+/* .offerOverlay .offerTitle {
+  text-shadow: 0 1px 3px rgb(0 0 0 / 40%);
+} */
+
+.offerTextWrap {
+  overflow: hidden;
+}
+
+.offerText {
+  color: var(--muted-foreground);
+}
+
+/* the card has no padding on mobile, so the text brings its own */
+.offerTextWrap .offerText {
+  padding: 1rem;
+}
+
+.offerHeader[data-state="open"] .offerChevron {
+  transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .offerTextWrap[data-state="open"] {
+    animation: offerOpen 250ms ease-out;
+  }
+
+  .offerTextWrap[data-state="closed"] {
+    animation: offerClose 200ms ease-in;
+  }
+
+  .offerChevron {
+    transition: transform 200ms ease;
+  }
+}
+
+@keyframes offerOpen {
+  from {
+    height: 0;
+    opacity: 0;
+  }
+  to {
+    height: var(--radix-collapsible-content-height);
+    opacity: 1;
+  }
+}
+
+@keyframes offerClose {
+  from {
+    height: var(--radix-collapsible-content-height);
+    opacity: 1;
+  }
+  to {
+    height: 0;
+    opacity: 0;
+  }
+}
+
+/* Desktop: two-column grid of cards, each with the image on the left and title and text on the right */
+@media (min-width: 769px) {
+  .offers {
+    max-width: var(--content-width);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* both cards in a row are equally tall */
+  .offers > li .offerCard {
+    height: 100%;
+  }
+
+  /* a lone last card (odd number of offers) spans the row and sits centred at normal card width */
+  .offers > li:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc(
+      (100% - 1.5rem) / 2
+    ); /* one column: half the row minus half the 1.5rem gap */
+  }
+
+  .offerCard {
+    flex-direction: row;
+  }
+
+  .offerCard .offerImage {
+    width: 40%;
+    flex-shrink: 0;
+    aspect-ratio: 4 / 3;
+  }
+
+  .offerBody {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    text-align: left;
+  }
+}

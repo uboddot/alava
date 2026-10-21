@@ -2,7 +2,7 @@ import './App.css';
 import AboutContent from './Section/About/AboutContent';
 import Hero from './Hero/Hero';
 import NavBar from './NavBar/NavBar';
-import Offers from './Offers/Offers';
+import OffersContent from './Section/Offers/OffersContent';
 import Section from './Section/Section';
 import { instagram } from './socials';
 
@@ -17,7 +17,7 @@ function App() {
           <AboutContent />
         </Section>
         <Section id="offers" title="Offers">
-          <Offers />
+          <OffersContent />
         </Section>
         <Section id="impressions" title="Impressions">
           <p>Place holder impressions.</p>
