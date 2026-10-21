@@ -25,3 +25,41 @@
   border-radius: 999px;
   box-shadow: 0 6px 20px rgb(58 31 51 / 25%);
 }
+
+/* scroll hint at the bottom centre of the hero */
+.heroScrollCue {
+  position: absolute;
+  left: 50%;
+  bottom: calc(2rem + env(safe-area-inset-bottom));
+  translate: -50% 0;
+  padding: 0.5rem;
+  color: var(--muted-foreground);
+  transition: opacity 200ms ease;
+}
+
+.heroScrollCue[data-hidden="true"] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.heroScrollCue svg {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .heroScrollCue svg {
+    animation: heroBounce 2s ease-in-out infinite;
+  }
+}
+
+@keyframes heroBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(0.4rem);
+  }
+}
