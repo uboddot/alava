@@ -9,17 +9,6 @@
   }
 }
 
-.introTitle {
-  font-size: clamp(3rem, 15vw, 7rem);
-  font-weight: bold;
-  line-height: 1;
-}
-
-.introSubtitle {
-  font-size: clamp(1.1rem, 4vw, 1.5rem);
-  color: var(--muted-foreground);
-}
-
 .textLink {
   text-decoration: underline;
   text-underline-offset: 4px;

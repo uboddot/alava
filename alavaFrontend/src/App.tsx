@@ -1,5 +1,6 @@
 import './App.css';
 import AboutContent from './Section/About/AboutContent';
+import Hero from './Hero/Hero';
 import NavBar from './NavBar/NavBar';
 import Offers from './Offers/Offers';
 import Section from './Section/Section';
@@ -11,10 +12,7 @@ function App() {
     <>
       <NavBar />
       <main>
-        <Section id="intro">
-          <h1 className="introTitle">Àlava</h1>
-          <p className="introSubtitle">Catering vo mir für die mit Liebi & Pflanze</p>
-        </Section>
+        <Hero />
         <Section id="about" title="About">
           <AboutContent />
         </Section>
