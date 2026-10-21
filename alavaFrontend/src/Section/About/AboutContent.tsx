@@ -1,10 +1,12 @@
 import './AboutContent.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { aboutBlocks, type AboutBlock } from './aboutBlocks';
+import { aboutBlocks, aboutValues, type AboutBlock, type AboutValue } from './aboutBlocks';
 
 export default AboutContent;
 
@@ -44,7 +46,82 @@ function AboutContent() {
           </CollapsibleTrigger>
         )}
       </Collapsible>
+
+      <AboutValues isDesktop={isDesktop} />
     </div>
+  );
+}
+
+// always visible, also on mobile when the text above is collapsed
+function AboutValues({ isDesktop }: { isDesktop: boolean }) {
+  return (
+    <div className="aboutValues">
+      <h3 className="aboutValuesTitle">Werte</h3>
+      {isDesktop ? (
+        <ul className="aboutValuesList">
+          {aboutValues.map((value) => (
+            <li key={value.title} className="aboutValue">
+              <AboutValueCard value={value} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <AboutValuesCarousel />
+      )}
+    </div>
+  );
+}
+
+// mobile: one card at a time, swipeable, with dots showing and selecting the current card
+function AboutValuesCarousel() {
+  const [api, setApi] = useState<CarouselApi>();
+  const [selected, setSelected] = useState(0);
+
+  useEffect(() => {
+    if (!api) return;
+    const onSelect = () => setSelected(api.selectedScrollSnap());
+    api.on('select', onSelect);
+    return () => {
+      api.off('select', onSelect);
+    };
+  }, [api]);
+
+  return (
+    <Carousel opts={{ align: 'center' }} setApi={setApi} className="aboutValuesCarousel">
+      <div className="aboutValuesDots">
+        {aboutValues.map((value, index) => (
+          <button
+            key={value.title}
+            type="button"
+            className="aboutValuesDot"
+            aria-label={`${value.title} anzeigen`}
+            aria-current={index === selected}
+            onClick={() => api?.scrollTo(index)}
+          >
+            <value.icon className="aboutValuesDotIcon" aria-hidden="true" />
+          </button>
+        ))}
+      </div>
+      <CarouselContent className="aboutValuesTrack">
+        {aboutValues.map((value) => (
+          <CarouselItem key={value.title} className="aboutValuesSlide">
+            <AboutValueCard value={value} />
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+    </Carousel>
+  );
+}
+
+function AboutValueCard({ value }: { value: AboutValue }) {
+  return (
+    <Card className="aboutValueCard">
+      <div className="aboutValueHeader">
+        <value.icon className="aboutValueIcon" />
+        <h4 className="aboutValueTitle">{value.title}</h4>
+      </div>
+      <p className="aboutValueText">{value.text}</p>
+    </Card>
   );
 }
 

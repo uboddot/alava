@@ -1,3 +1,5 @@
+import { Heart, Leaf, Palette, Sprout, type LucideIcon } from 'lucide-react';
+
 export type AboutBlock = {
   text: string;
   image: { src: string; alt: string };
@@ -20,5 +22,35 @@ export const aboutBlocks: AboutBlock[] = [
   {
     text: 'Mein Essen ist vegan, gesund, manchmal deftig, manchmal leicht, farbig und hübsch. Lässt sich teilen und dazu verweilen.',
     image: { src: placeholderImage, alt: 'Farbiges veganes Essen zum Teilen' },
+  },
+];
+
+export type AboutValue = {
+  title: string;
+  text: string;
+  icon: LucideIcon;
+};
+
+// placeholder icons until the real ones are decided
+export const aboutValues: AboutValue[] = [
+  {
+    title: 'Persönlich',
+    text: 'Alles ist von mir von Hand gemacht und auf deinen Anlass und deine Wünsche abgestimmt.',
+    icon: Heart,
+  },
+  {
+    title: 'Pflanzlich',
+    text: '100 % vegan, mal deftig, mal leicht, und so gut, dass niemandem etwas fehlt.',
+    icon: Leaf,
+  },
+  {
+    title: 'Nachhaltig',
+    text: 'Saisonale Zutaten, wenn möglich aus der Region, und gut geplant, damit wenig übrig bleibt.',
+    icon: Sprout,
+  },
+  {
+    title: 'Kreativ',
+    text: 'Farbig, hübsch und zum Teilen gemacht: Essen, das zuerst die Augen freut.',
+    icon: Palette,
   },
 ];
