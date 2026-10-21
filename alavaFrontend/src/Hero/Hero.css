@@ -1,3 +1,10 @@
+/* .section.hero so it wins over .section regardless of stylesheet order */
+.section.hero {
+  position: relative;
+  /* room for the contact button so it never overlaps the text on short screens */
+  padding-bottom: 7rem;
+}
+
 .introTitle {
   font-size: clamp(3rem, 15vw, 7rem);
   font-weight: bold;
@@ -7,4 +14,14 @@
 .introSubtitle {
   font-size: clamp(1.1rem, 4vw, 1.5rem);
   color: var(--muted-foreground);
+}
+
+/* floats at the bottom of the hero and scrolls away with it */
+.heroContact {
+  position: absolute;
+  left: 80%;
+  bottom: calc(2rem + env(safe-area-inset-bottom));
+  translate: -50% 0;
+  border-radius: 999px;
+  box-shadow: 0 6px 20px rgb(58 31 51 / 25%);
 }
