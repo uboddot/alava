@@ -72,16 +72,41 @@
   padding: 1rem;
 }
 
-.offerHeader[data-state="open"] .offerChevron {
+/* Mobile: the first offers, then the rest behind "Mehr anzeigen" */
+.offersMobile,
+.offersMore {
+  width: 100%;
+  max-width: 48rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.offersMoreContent {
+  width: 100%;
+  overflow: hidden;
+  /* padding instead of margin so the space is part of the animated height */
+  padding-top: 1.5rem;
+}
+
+.offersMoreTrigger {
+  margin-top: 0.75rem;
+  font-size: 1.5rem;
+}
+
+.offerHeader[data-state="open"] .offerChevron,
+.offersMoreTrigger[data-state="open"] .offerChevron {
   transform: rotate(180deg);
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .offerTextWrap[data-state="open"] {
+  .offerTextWrap[data-state="open"],
+  .offersMoreContent[data-state="open"] {
     animation: offerOpen 250ms ease-out;
   }
 
-  .offerTextWrap[data-state="closed"] {
+  .offerTextWrap[data-state="closed"],
+  .offersMoreContent[data-state="closed"] {
     animation: offerClose 200ms ease-in;
   }
 
